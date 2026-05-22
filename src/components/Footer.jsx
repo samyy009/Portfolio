@@ -35,21 +35,8 @@ const Footer = () => {
 
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-white/15 text-[10px] tracking-widest uppercase font-black">
-            © {new Date().getFullYear()} Sameer Sangam · Build 2.0.4
+            © {new Date().getFullYear()} Sameer Sangam
           </p>
-          
-          <div className="flex items-center gap-8">
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500/50" />
-              <span className="text-[9px] font-black text-white/20 uppercase tracking-[0.2em]">System: <span className="text-white/40">Operational</span></span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-[9px] font-black text-white/20 uppercase tracking-[0.2em]">Uptime: <span className="text-white/40">99.9%</span></span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-[9px] font-black text-white/20 uppercase tracking-[0.2em]">Latency: <span className="text-white/40">24ms</span></span>
-            </div>
-          </div>
         </div>
       </div>
     </footer>

@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSound } from '../hooks/useSound';
-import StatusIndicator from './StatusIndicator';
 import useActiveSection from '../hooks/useActiveSection';
 
 const SECTION_IDS = ['hero', 'about', 'services', 'projects', 'skills', 'achievements', 'contact'];
 
 
-const Navbar = ({ toggleTheme, theme, openCommandPalette }) => {
+const Navbar = ({ toggleTheme, theme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const active = useActiveSection(SECTION_IDS);
@@ -18,16 +17,24 @@ const Navbar = ({ toggleTheme, theme, openCommandPalette }) => {
     playToggle();
   };
 
-  const handlePalette = () => {
-    playClick();
-    openCommandPalette(true);
-  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    playClick();
+    if (window.lenis) {
+      window.lenis.scrollTo(href);
+    } else {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsOpen(false);
+  };
 
   const navLinks = [
     { name: 'HOME', href: '#hero', id: 'hero' },
@@ -59,9 +66,6 @@ const Navbar = ({ toggleTheme, theme, openCommandPalette }) => {
               Sameer Sangam
             </motion.a>
 
-            <div className="hidden xl:block">
-              <StatusIndicator theme={theme} />
-            </div>
           </div>
 
           {/* Desktop links */}
@@ -70,7 +74,7 @@ const Navbar = ({ toggleTheme, theme, openCommandPalette }) => {
               <motion.a
                 key={link.name}
                 href={link.href}
-                onClick={playClick}
+                onClick={(e) => handleNavClick(e, link.href)}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.07, duration: 0.5 }}
@@ -84,14 +88,6 @@ const Navbar = ({ toggleTheme, theme, openCommandPalette }) => {
                 }`} />
               </motion.a>
             ))}
-
-            <button
-              onClick={handlePalette}
-              className={`hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl border border-white/5 bg-white/2 hover:bg-white/5 transition-all group ${theme === 'light' ? 'text-slate-500 border-slate-200' : 'text-white/40'}`}
-            >
-              <span className="text-[10px] font-black uppercase tracking-widest">Command</span>
-              <kbd className={`px-1.5 py-0.5 rounded text-[10px] font-black border transition-colors ${theme === 'light' ? 'bg-slate-100 border-slate-200 text-slate-400' : 'bg-white/5 border-white/10 text-white/30 group-hover:text-orange-400 group-hover:border-orange-500/30'}`}>⌘K</kbd>
-            </button>
 
             <div className="flex items-center gap-2">
               <button
@@ -158,7 +154,7 @@ const Navbar = ({ toggleTheme, theme, openCommandPalette }) => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className={`block py-4 text-[10px] font-black tracking-widest border-b border-white/5 transition-colors ${
                     active === link.id ? 'text-orange-400' : theme === 'light' ? 'text-slate-500 hover:text-orange-400' : 'text-white/50 hover:text-white'
                   }`}

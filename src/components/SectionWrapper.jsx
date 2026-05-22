@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const SectionWrapper = ({ children, id }) => {
   return (
-    <section id={id} className="relative py-24 md:py-32 overflow-hidden">
+    <section id={id} className="relative py-12 md:py-16 overflow-hidden">
       {/* Background Section Reveal - Vertical Bars */}
       <div className="absolute inset-0 flex pointer-events-none z-0">
         {[...Array(4)].map((_, i) => (

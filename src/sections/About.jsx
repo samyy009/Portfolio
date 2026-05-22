@@ -11,7 +11,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-28">
+    <section id="about" className="py-16">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24 items-center">
 
@@ -26,7 +26,7 @@ const About = () => {
             <div className="relative rounded-3xl overflow-hidden border border-white/8 group-hover:border-orange-500/25 transition-colors duration-500">
               <div className="absolute inset-0 bg-gradient-to-br from-orange-500/8 via-transparent to-transparent z-10" />
               <img
-                src="https://github.com/samyy009.png"
+                src="/images/hero-avatar.jpg"
                 alt="Sameer Sangam"
                 className="w-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
                 style={{ minHeight: '400px' }}

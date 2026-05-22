@@ -19,11 +19,11 @@ import SpotlightBackground from './components/SpotlightBackground';
 import SectionWrapper from './components/SectionWrapper';
 import SmoothScroll from './components/SmoothScroll';
 import MatrixLoader from './components/MatrixLoader';
+import ParticleBackground from './components/ParticleBackground';
 import ThreeBackground from './components/ThreeBackground';
 import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 import Magnetic from './components/Magnetic';
-import CommandPalette from './components/CommandPalette';
 
 // Hooks & Providers
 import { SoundProvider } from './hooks/useSound';
@@ -31,7 +31,6 @@ import { SoundProvider } from './hooks/useSound';
 function App() {
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState('dark');
-  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const handleLoaded = useCallback(() => setLoading(false), []);
 
   useEffect(() => {
@@ -61,25 +60,20 @@ function App() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <CommandPalette 
-              isOpen={isCommandPaletteOpen} 
-              setIsOpen={setIsCommandPaletteOpen}
-              toggleTheme={toggleTheme}
-              theme={theme}
-            />
             <SmoothScroll>
               <div
                 className="min-h-screen font-sans cursor-none overflow-x-hidden mesh-gradient transition-all duration-700"
                 style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
               >
                 {/* Global overlays */}
-                <div className="fixed inset-0 noise-overlay z-[1] opacity-[0.03]" />
+                <div className="fixed inset-0 noise-overlay z-[1] opacity-[0.03] pointer-events-none" />
                 <CustomCursor />
+                <ParticleBackground />
                 <ThreeBackground />
                 <SpotlightBackground />
                 <ScrollProgress />
 
-                <Navbar toggleTheme={toggleTheme} theme={theme} openCommandPalette={setIsCommandPaletteOpen} />
+                <Navbar toggleTheme={toggleTheme} theme={theme} />
 
                 <main className="relative z-10">
                   <Hero theme={theme} />

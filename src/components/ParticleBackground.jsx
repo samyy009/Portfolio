@@ -15,55 +15,89 @@ const ParticleBackground = () => {
     resize();
     window.addEventListener('resize', resize);
 
-    // Mixed orange and blue particles
-    const particles = Array.from({ length: 80 }, (_, i) => ({
+    // Mouse interaction state
+    const mouse = { x: -1000, y: -1000 };
+    const handleMouseMove = (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+
+    // Drifting particles
+    const particles = Array.from({ length: 140 }, (_, i) => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      r: Math.random() * 1.8 + 0.4,
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: (Math.random() - 0.5) * 0.25,
-      opacity: Math.random() * 0.45 + 0.15,
-      color: i % 2 === 0 ? '249,115,22' : '59,130,246' // orange vs blue
+      r: Math.random() * 2.5 + 1.2,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      originalVx: (Math.random() - 0.5) * 0.3,
+      originalVy: (Math.random() - 0.5) * 0.3,
+      opacity: Math.random() * 0.4 + 0.2,
+      color: i % 2 === 0 ? '249,115,22' : '255,255,255',
     }));
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((p) => {
-        // Outer glow
-        const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5);
-        grd.addColorStop(0, `rgba(${p.color},${p.opacity})`);
-        grd.addColorStop(1, `rgba(${p.color},0)`);
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
-        ctx.fillStyle = grd;
-        ctx.fill();
-
-        // Solid core dot
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.color},${p.opacity + 0.2})`;
-        ctx.fill();
+        // Stronger Magnetic Repulsion
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const dist = Math.hypot(dx, dy);
+        const radius = 180; // Repulsion radius
+        
+        if (dist < radius) {
+          const force = (radius - dist) / radius;
+          const angle = Math.atan2(dy, dx);
+          p.vx -= Math.cos(angle) * force * 0.8;
+          p.vy -= Math.sin(angle) * force * 0.8;
+        } else {
+          // Soft return to drift
+          p.vx *= 0.98;
+          p.vy *= 0.98;
+          p.vx += p.originalVx * 0.05;
+          p.vy += p.originalVy * 0.05;
+        }
 
         p.x += p.vx;
         p.y += p.vy;
+
+        // Wrap around with soft bounce
         if (p.x < 0) p.x = canvas.width;
         if (p.x > canvas.width) p.x = 0;
         if (p.y < 0) p.y = canvas.height;
         if (p.y > canvas.height) p.y = 0;
+
+        // Draw node
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.color},${p.opacity})`;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = `rgba(${p.color},${p.opacity})`;
+        ctx.fill();
+        ctx.shadowBlur = 0;
       });
 
-      // Connecting lines between close particles
+      // Luminous Thread Connections
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
-          const dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
-          if (dist < 130) {
+          const p1 = particles[i];
+          const p2 = particles[j];
+          const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
+          
+          if (dist < 120) {
+            const threadOpacity = (1 - dist / 120) * 0.15;
             ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            const color = particles[i].color;
-            ctx.strokeStyle = `rgba(${color},${0.06 * (1 - dist / 130)})`;
-            ctx.lineWidth = 0.5;
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            
+            // Create a gradient thread
+            const grd = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
+            grd.addColorStop(0, `rgba(${p1.color},${threadOpacity})`);
+            grd.addColorStop(1, `rgba(${p2.color},${threadOpacity})`);
+            
+            ctx.strokeStyle = grd;
+            ctx.lineWidth = 0.4;
             ctx.stroke();
           }
         }
@@ -76,6 +110,7 @@ const ParticleBackground = () => {
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 

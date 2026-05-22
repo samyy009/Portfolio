@@ -4,7 +4,7 @@ import { experience } from '../data/experience';
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-28 relative overflow-hidden">
+    <section id="experience" className="py-16 relative overflow-hidden">
       <div className="max-w-5xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}

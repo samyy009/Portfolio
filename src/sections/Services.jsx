@@ -33,7 +33,7 @@ const SERVICES = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-28 relative overflow-hidden">
+    <section id="services" className="py-16 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <motion.div 
           initial={{ opacity: 0 }} 

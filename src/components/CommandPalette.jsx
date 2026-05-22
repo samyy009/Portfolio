@@ -66,9 +66,13 @@ const CommandPalette = ({ isOpen, setIsOpen, toggleTheme, theme }) => {
     if (action.id === 'theme') {
       toggleTheme();
     } else {
-      const element = document.getElementById(action.id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+      if (window.lenis) {
+        window.lenis.scrollTo(`#${action.id}`);
+      } else {
+        const element = document.getElementById(action.id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     }
     setQuery('');

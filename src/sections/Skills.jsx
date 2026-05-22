@@ -42,7 +42,7 @@ import { motion } from 'framer-motion';
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-28">
+    <section id="skills" className="py-16">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mb-16">
           <p className="text-orange-400 text-xs font-black uppercase tracking-[0.2em] mb-3">My Skills</p>
