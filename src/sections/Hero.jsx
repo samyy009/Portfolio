@@ -54,9 +54,9 @@ const Hero = () => {
           <div className="absolute inset-0 rounded-full bg-orange-500/30 blur-3xl animate-pulse pointer-events-none" />
           <div className="relative p-1 rounded-full bg-gradient-to-tr from-orange-500 to-purple-600 shadow-2xl">
             <img
-              src="/images/hero-avatar.jpg"
+              src="/images/hero-avatar.png"
               alt="Sameer Sangam"
-              className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-black object-cover object-top shadow-inner"
+              className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-black object-cover object-center shadow-inner"
               onError={(e) => {
                 e.target.src = 'https://ui-avatars.com/api/?name=SS&background=1a0800&color=f97316&size=256&bold=true';
               }}

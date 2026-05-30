@@ -26,7 +26,7 @@ const About = () => {
             <div className="relative rounded-3xl overflow-hidden border border-white/8 group-hover:border-orange-500/25 transition-colors duration-500">
               <div className="absolute inset-0 bg-gradient-to-br from-orange-500/8 via-transparent to-transparent z-10" />
               <img
-                src="/images/hero-avatar.jpg"
+                src="/images/hero-avatar.png"
                 alt="Sameer Sangam"
                 className="w-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
                 style={{ minHeight: '400px' }}
