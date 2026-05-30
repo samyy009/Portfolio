@@ -101,7 +101,7 @@ const About = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex gap-6 flex-wrap"
+              className="flex gap-4 flex-wrap"
             >
               <Magnetic>
                 <a
@@ -114,6 +114,20 @@ const About = () => {
                   <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                   </svg>
+                </a>
+              </Magnetic>
+
+              <Magnetic>
+                <a
+                  href="/resume.pdf"
+                  download="Sameer_Sangam_Resume.pdf"
+                  id="about-resume-download-btn"
+                  className="group px-8 py-3 bg-orange-500/10 border border-orange-500/20 hover:bg-orange-500/20 hover:border-orange-500/50 rounded-full text-sm font-bold text-orange-400 transition-all flex items-center gap-2"
+                >
+                  <svg className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                  </svg>
+                  Download Resume
                 </a>
               </Magnetic>
             </motion.div>

@@ -15,8 +15,8 @@ export const projects = [
       'Admin dashboard for inventory and order management',
     ],
     tech: ['React', 'Flask', 'MySQL', 'PostgreSQL', 'OAuth 2.0', 'Tailwind CSS', 'Python'],
-    github: 'https://github.com/samyy009',
-    demo: '#',
+    github: 'https://github.com/samyy009/laces-and-soles',
+    demo: null,
     image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=500&fit=crop&auto=format',
   },
   {
@@ -55,8 +55,8 @@ export const projects = [
       'Built entirely in C — pure game programming without an engine',
     ],
     tech: ['C', 'Raylib', 'Game Development', 'Graphics Programming', '2D Games'],
-    github: 'https://github.com/samyy009',
-    demo: '#',
+    github: 'https://github.com/samyy009/galactic-blaster',
+    demo: null,
     image: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800&h=500&fit=crop&auto=format',
   },
   {
@@ -75,8 +75,8 @@ export const projects = [
       'Helios: Underbody ML-powered mechanical safety reporting',
     ],
     tech: ['Data Annotation', 'Semantic Segmentation', 'Python', 'Ango Hub', 'ML Pipelines', 'QA'],
-    github: '#',
-    demo: '#',
+    github: null,
+    demo: null,
     image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=500&fit=crop&auto=format',
   },
 ];
