@@ -75,6 +75,22 @@ export const milestones = [
 
 export const certificates = [
   {
+    id: 'cert-data-science',
+    title: 'Data Science & Analytics Certification',
+    org: 'Professional Certification',
+    year: '2026',
+    image: '/images/cert-data-science.jpg',
+    desc: 'Professional certification covering data analysis, machine learning foundations, data visualization, and predictive modeling.',
+  },
+  {
+    id: 'cert-full-stack',
+    title: 'Full Stack Web Development Certification',
+    org: 'Professional Certification',
+    year: '2026',
+    image: '/images/cert-full-stack.jpg',
+    desc: 'Comprehensive full-stack development certification covering modern front-end frameworks, RESTful APIs, and database engineering.',
+  },
+  {
     id: 'cert-azure',
     title: 'Microsoft Azure Course Completion',
     org: 'Microsoft Elevate & FICE',
